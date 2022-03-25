@@ -1,16 +1,26 @@
-export interface AuthInfo {
-    isLoggedIn: boolean;
-    user: User;
-}
+export type UserType = 'P' | 'S';
+export type HTTPMethod = 'get' | 'post' | 'put' | 'delete';
 
 export interface User {
-    name: string;
+    id: string;
     token: string;
+    userType: UserType;
 };
 
-export interface Lecture {
-    id: string;
+export interface SignupForm {
+    username: string;
+    password: string;
     name: string;
-    professor: string;
-    students: string[];
-};
+    schoolID: string;
+    userType: UserType;
+}
+
+export interface LoginForm {
+    username: string;
+    password: string;
+}
+
+export interface PermissionType {
+    userTypes?: UserType[];
+    lectureID?: string;
+}

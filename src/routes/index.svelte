@@ -1,6 +1,9 @@
-<script lang="ts">
-  import { userStore } from "$lib/stores";
+<!-- <script lang="ts">
+  import { authStore } from "$lib/stores";
   import { checkAuth } from "$lib/api/auth";
+  import { browser } from "$app/env";
 
-  checkAuth($userStore);
-</script>
+  if (browser) {
+    checkAuth($authStore);
+  }
+</script> -->
