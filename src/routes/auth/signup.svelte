@@ -2,7 +2,6 @@
   import "$lib/styles/auth.css";
   import Button from "$lib/shared/Button.svelte";
 
-  import { post } from "$lib/api/util";
   import type { SignupForm } from "$lib/types";
 
   let inputField: SignupForm = {
@@ -14,7 +13,7 @@
   };
 
   function submit() {
-    post("/auth/signup", inputField);
+    // post("/auth/signup", inputField);
   }
 </script>
 

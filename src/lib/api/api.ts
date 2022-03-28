@@ -7,7 +7,7 @@ interface APIParameter {
     data?: any;
 }
 
-const BACKEND_URL: string = 'http://localhost:5000';
+const BACKEND_URL: string = 'https://api.whiteboard.jungwoong.kim';
 
 export async function api({ endpoint, method, token, data }: APIParameter) {
     const fetchOptions = { method, headers: {} };
@@ -27,21 +27,21 @@ export async function api({ endpoint, method, token, data }: APIParameter) {
         const res = await fetch(url, fetchOptions);
 
         const { status } = res;
-        const resBody = await res.json();
+        const body = await res.json();
 
         if (!res.ok) {
             return {
                 status: res.status,
-                error: resBody.error,
+                error: body.message,
             };
         }
 
-        return { status, body: resBody };
+        return { status, body };
     }
     catch (error) {
         return {
             status: 500,
-            error: error,
+            error: error.message,
         };
     }
 }
