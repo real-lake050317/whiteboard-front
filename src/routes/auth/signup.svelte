@@ -1,4 +1,7 @@
 <script lang="ts">
+  import "$lib/styles/auth.css";
+  import Button from "$lib/shared/Button.svelte";
+
   import { post } from "$lib/api/util";
   import type { SignupForm } from "$lib/types";
 
@@ -16,24 +19,35 @@
 </script>
 
 <div class="signup">
+  <h1>Sign Up</h1>
+  <a href="/auth/login">Have account?</a>
+
   <form on:submit|preventDefault={submit}>
-    <div class="form-field">
-      <input type="text" bind:value={inputField.username} />
-    </div>
+    <input
+      type="text"
+      bind:value={inputField.username}
+      placeholder="Username"
+    />
 
-    <div class="form-field">
-      <input type="text" bind:value={inputField.password} />
-    </div>
+    <input
+      type="text"
+      bind:value={inputField.password}
+      placeholder="Password"
+    />
 
-    <div class="form-field">
-      <input type="text" bind:value={inputField.name} />
-    </div>
+    <input
+      type="text"
+      bind:value={inputField.name}
+      placeholder="Full Name (ex: John Doe)"
+    />
 
-    <div class="form-field">
-      <input type="text" bind:value={inputField.schoolID} />
-    </div>
+    <input
+      type="text"
+      bind:value={inputField.schoolID}
+      placeholder="School ID (ex: 2022320082)"
+    />
 
-    <div class="form-field">
+    <div class="radio-field">
       <label>
         <input type="radio" bind:group={inputField.userType} value={"S"} />
         학생
@@ -44,16 +58,6 @@
       </label>
     </div>
 
-    <button type="submit" />
+    <Button on:click={submit}>Sign Up</Button>
   </form>
 </div>
-
-<style>
-  .form-field {
-    margin: 18px auto;
-  }
-  input {
-    width: 100%;
-    border-radius: 6px;
-  }
-</style>

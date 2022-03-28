@@ -1,9 +1,8 @@
-<!-- <script lang="ts">
-  import { authStore } from "$lib/stores";
-  import { checkAuth } from "$lib/api/auth";
-  import { browser } from "$app/env";
-
-  if (browser) {
-    checkAuth($authStore);
+<script lang="ts" context="module">
+  export async function load() {
+    return {
+      status: 302,
+      redirect: "/dashboard",
+    };
   }
-</script> -->
+</script>
