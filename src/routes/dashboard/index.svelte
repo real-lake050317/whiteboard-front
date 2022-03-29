@@ -20,7 +20,7 @@
 </script>
 
 <script lang="ts">
-  import Page from "$lib/components/Page.svelte";
+  import Page from "../../components/Page.svelte";
 
   export let posts = [];
 </script>
