@@ -1,25 +1,29 @@
-import type { SignupForm, PermissionType, User, LoginForm } from "$lib/types"
+import type { SignupForm, PermissionType, Auth, LoginForm } from "$lib/types"
 import { api } from "./api";
-import { getLectures } from "./lectures";
+import { getLecturesOfUser } from "./lectures";
 
-export async function checkPermission(user: User, permissions: PermissionType) {
-    if (permissions.userTypes && !permissions.userTypes.includes(user.userType)) {
+export async function checkPermission(auth: Auth, permissions: PermissionType) {
+    if (permissions.userTypes && !permissions.userTypes.includes(auth.userType)) {
         return false;
     }
 
-    if (permissions.lectureID) {
-        const res = await getLectures(user);
-
-        if (res.error) {
-            return false;
-        }
-
-        if (!res.body.lectures.includes(permissions.lectureID)) {
-            return false;
-        }
+    if (permissions.lectureCode) {
+        return await userInLecture(auth, permissions.lectureCode);
     }
 
     return true;
+}
+
+export async function userInLecture(auth: Auth, lectureCode: string) {
+    const res = await getLecturesOfUser(auth);
+
+    if (res.error) {
+        return false;
+    }
+
+    const lectureCodes = res.lectures.map(lecture => lecture.code);
+
+    return lectureCodes.includes(lectureCode);
 }
 
 export async function login(loginForm: LoginForm) {

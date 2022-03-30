@@ -1,11 +1,13 @@
 <script lang="ts">
   import Button from "$lib/shared/Button.svelte";
 
-  import { goto } from "$app/navigation";
   import { session } from "$app/stores";
+  import { post } from "$lib/api/utils";
+  import { goto } from "$app/navigation";
 
   function logout() {
-    $session["user"] = null;
+    $session["auth"] = null;
+    post("/api/logout");
     goto("/");
   }
 </script>
@@ -17,7 +19,8 @@
   <a href="/lecture">Lecture</a>
 
   <div class="logout">
-    {#if $session["user"]}
+    {#if $session["auth"]}
+      <h3>{$session["auth"].userType === "S" ? "학생" : "교수"}</h3>
       <Button on:click={logout}>Logout</Button>
     {/if}
   </div>

@@ -21,27 +21,33 @@ export async function api({ endpoint, method, token, data }: APIParameter) {
         fetchOptions.headers['Authorization'] = `Bearer ${token}`;
     }
 
-    try {
-        const url = `${BACKEND_URL}/${endpoint}`;
-        
-        const res = await fetch(url, fetchOptions);
+    const url = `${BACKEND_URL}/${endpoint}`;
+    console.log(url, fetchOptions);
 
-        const { status } = res;
-        const body = await res.json();
+    return fetch(url, fetchOptions)
+        .then(async (r) => {
+            try {
+                const data = await r.json();
+                if (!r.ok) throw new Error(data.message);
+                return data;
+            }
+            catch (err) {
+                throw err;
+            }
+        })
+        .catch(err => {
+            return { error: err.message };
+        });
+}
 
-        if (!res.ok) {
-            return {
-                status: res.status,
-                error: body.message,
-            };
-        }
+export function post(endpoint: string, data?: any, token?: string) {
+    return api({ method: 'post', endpoint, data, token });
+}
 
-        return { status, body };
-    }
-    catch (error) {
-        return {
-            status: 500,
-            error: error.message,
-        };
-    }
+export function get(endpoint: string, token?: string) {
+    return api({ method: 'get', endpoint, token });
+}
+
+export function del(endpoint: string, token?: string) {
+    return api({ method: 'delete', endpoint, token });
 }

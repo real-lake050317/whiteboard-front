@@ -1,8 +1,6 @@
 <script context="module" lang="ts">
   export function load({ session }) {
-    const { user } = session;
-
-    if (user) {
+    if (session.auth) {
       return {
         status: 302,
         redirect: "/",
@@ -14,12 +12,15 @@
 </script>
 
 <script lang="ts">
-  import "$lib/styles/auth.css";
+  import "$lib/styles/inputform.css";
+
+  import Button from "$lib/shared/Button.svelte";
+
+  import type { LoginForm } from "$lib/types";
+  import { post } from "$lib/api/utils";
 
   import { session } from "$app/stores";
-  import { login } from "$lib/api/auth";
-  import Button from "$lib/shared/Button.svelte";
-  import type { LoginForm } from "$lib/types";
+  import { goto } from "$app/navigation";
 
   let inputField: LoginForm = {
     username: "",
@@ -29,17 +30,17 @@
   let error: string;
 
   async function submit() {
-    const res = await login(inputField);
+    console.log(inputField);
+    const res = await post("/api/login", inputField);
     console.log(res);
-    if (res.error) {
-      error = res.error;
-      return;
+
+    error = res["error"];
+
+    if (res["user"]) {
+      $session["auth"] = res["user"];
+      $session["auth"].token = res["token"];
+      goto("/");
     }
-
-    const { id, token, userType } = res.body;
-
-    $session["user"] = { id, token, userType };
-    console.log($session["user"]);
   }
 </script>
 
@@ -49,7 +50,7 @@
   <a href="/auth/signup">Do not have account?</a>
 
   {#if error}
-    <p>{error}</p>
+    <p class="error">{error}</p>
   {/if}
 
   <form on:submit|preventDefault={submit}>
@@ -69,6 +70,6 @@
       />
     </div>
 
-    <Button on:click={submit}>Login</Button>
+    <Button>Login</Button>
   </form>
 </div>

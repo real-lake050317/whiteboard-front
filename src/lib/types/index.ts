@@ -1,8 +1,8 @@
 export type UserType = 'P' | 'S';
 export type HTTPMethod = 'get' | 'post' | 'put' | 'delete';
 
-export interface User {
-    id: string;
+export interface Auth {
+    userId: string;
     token: string;
     userType: UserType;
 };
@@ -11,7 +11,7 @@ export interface SignupForm {
     username: string;
     password: string;
     name: string;
-    schoolID: string;
+    schoolId: string;
     userType: UserType;
 }
 
@@ -20,7 +20,13 @@ export interface LoginForm {
     password: string;
 }
 
+export interface LectureForm {
+    code: string;
+    name: string;
+}
+
+
 export interface PermissionType {
     userTypes?: UserType[];
-    lectureID?: string;
+    lectureCode?: string;
 }

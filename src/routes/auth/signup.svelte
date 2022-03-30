@@ -1,25 +1,37 @@
 <script lang="ts">
-  import "$lib/styles/auth.css";
+  import "$lib/styles/inputform.css";
   import Button from "$lib/shared/Button.svelte";
 
   import type { SignupForm } from "$lib/types";
+  import { post } from "$lib/api/utils";
+  import { goto } from "$app/navigation";
 
   let inputField: SignupForm = {
     username: "",
     password: "",
     name: "",
-    schoolID: "",
+    schoolId: "",
     userType: "S",
   };
 
-  function submit() {
-    // post("/auth/signup", inputField);
+  let error: string;
+
+  async function submit() {
+    const res = await post("/api/signup", inputField);
+
+    if (!res["error"]) goto("/auth/login");
+
+    error = res["error"];
   }
 </script>
 
 <div class="signup">
   <h1>Sign Up</h1>
   <a href="/auth/login">Have account?</a>
+
+  {#if error}
+    <p class="error">{error}</p>
+  {/if}
 
   <form on:submit|preventDefault={submit}>
     <input
@@ -42,7 +54,7 @@
 
     <input
       type="text"
-      bind:value={inputField.schoolID}
+      bind:value={inputField.schoolId}
       placeholder="School ID (ex: 2022320082)"
     />
 
@@ -57,6 +69,6 @@
       </label>
     </div>
 
-    <Button on:click={submit}>Sign Up</Button>
+    <Button>Sign Up</Button>
   </form>
 </div>

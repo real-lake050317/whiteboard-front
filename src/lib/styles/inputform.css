@@ -15,3 +15,8 @@ form {
 .radio-field {
     margin: 8px 0;
 }
+
+.error {
+  font-weight: bold;
+  color: darkred;
+}
