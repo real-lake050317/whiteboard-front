@@ -41,7 +41,9 @@
 <script lang="ts">
   import Page from "$lib/shared/Page.svelte";
   import ClickCard from "$lib/shared/ClickCard.svelte";
+  import Button from "$lib/shared/Button.svelte";
   import { goto } from "$app/navigation";
+  import { session } from "$app/stores";
 
   export let lecture: any;
 
@@ -53,6 +55,10 @@
 
 <div class="lecture">
   <Page title={lecture.name} description={lecture.code}>
+    {#if $session["auth"] && $session["auth"].userType === "P"}
+      <Button on:click={() => goto(`/lecture/${lecture.code}/post/create`)}>게시물 만들기</Button>
+    {/if}
+
     <div class="post-list">
       {#each lecture.posts as post}
         <div class="list-element">

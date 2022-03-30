@@ -36,7 +36,7 @@
 </script>
 
 <div class="dashboard">
-  <Page title="Dashboard" description="최근 포스트를 확인할 수 있습니다." />
+  <Page title="Dashboard" description="최근 게시물을 확인할 수 있습니다." />
   <div class="post-list">
     {#each posts as post}
       <div class="list-element">

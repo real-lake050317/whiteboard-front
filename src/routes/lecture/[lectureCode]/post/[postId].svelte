@@ -21,22 +21,25 @@
       };
     }
 
-    const post = await getPost(session.auth, params.lectureCode, params.postId);
+    const { post } = await getPost(
+      session.auth,
+      params.lectureCode,
+      params.postId
+    );
 
     return {
       props: {
-        post
-      }
+        post,
+      },
     };
   }
 </script>
 
-<script lang='ts'>
+<script lang="ts">
+  import Page from "$lib/shared/Page.svelte";
+  import { marked } from "marked";
 
-    import Page from "$lib/shared/Page.svelte";
-    import { marked } from "marked";
-
-    export let post;
+  export let post;
 </script>
 
 <div class="post">

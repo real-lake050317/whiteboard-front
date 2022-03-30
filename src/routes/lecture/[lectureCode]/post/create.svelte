@@ -57,10 +57,9 @@
 </script>
 
 <div class="post-create">
-  <Page title="Create Post" description="새로운 포스트를 작성할 수 있습니다.">
+  <Page title="Create Post" description="새로운 게시물을 작성할 수 있습니다.">
     <div class="markdown-editor">
       <div class="left-panel">
-        <h2>Markdown</h2>
         <textarea bind:value={source} class="source" />
       </div>
 
@@ -100,7 +99,7 @@
   .source {
     border: none;
     width: 100%;
-    height: 90%;
+    height: 100%;
   }
   .source:focus {
     outline: none;
