@@ -11,7 +11,7 @@
     }
 
     const check = await checkPermission(session.auth, {
-      lectureCode: params["lectureCode"],
+      lectureCode: params.lectureCode,
     });
 
     if (!check) {
@@ -56,7 +56,12 @@
 <div class="lecture">
   <Page title={lecture.name} description={lecture.code}>
     {#if $session["auth"] && $session["auth"].userType === "P"}
-      <Button on:click={() => goto(`/lecture/${lecture.code}/post/create`)}>게시물 만들기</Button>
+      <Button on:click={() => goto(`/lecture/${lecture.code}/post/create`)}>
+        게시물 만들기
+      </Button>
+      <Button on:click={() => goto(`/lecture/${lecture.code}/students`)}>
+        학생 관리 메뉴
+      </Button>
     {/if}
 
     <div class="post-list">

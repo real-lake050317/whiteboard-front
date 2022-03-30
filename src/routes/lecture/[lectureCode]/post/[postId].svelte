@@ -11,13 +11,13 @@
     }
 
     const check = await checkPermission(session.auth, {
-      lectureCode: params["lectureCode"],
+      lectureCode: params.lectureCode,
     });
 
     if (!check) {
       return {
         status: 301,
-        redirect: `/lecture/${params["lectureCode"]}`,
+        redirect: `/lecture/${params.lectureCode}`,
       };
     }
 

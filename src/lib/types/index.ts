@@ -24,7 +24,10 @@ export interface LectureForm {
     code: string;
     name: string;
 }
-
+export interface PostForm {
+    title: string;
+    body: string;
+}
 
 export interface PermissionType {
     userTypes?: UserType[];

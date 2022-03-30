@@ -11,6 +11,10 @@
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "devDependencies": {
+    "@types/cookie": "^0.4.1",
+    "@types/dompurify": "^2.3.3",
+    "@types/marked": "^4.0.3",
+    "@types/sanitize-html": "^2.6.2",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
     "svelte": "^3.46.0",
@@ -21,11 +25,9 @@
   },
   "type": "module",
   "dependencies": {
-    "@types/cookie": "^0.4.1",
-    "@types/dompurify": "^2.3.3",
-    "@types/marked": "^4.0.3",
     "cookie": "^0.4.2",
     "dompurify": "^2.3.6",
-    "marked": "^4.0.12"
+    "marked": "^4.0.12",
+    "sanitize-html": "^2.7.0"
   }
 }
