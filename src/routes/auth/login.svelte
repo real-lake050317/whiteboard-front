@@ -64,7 +64,7 @@
 
     <div class="form-field">
       <input
-        type="text"
+        type="password"
         bind:value={inputField.password}
         placeholder="Password"
       />
