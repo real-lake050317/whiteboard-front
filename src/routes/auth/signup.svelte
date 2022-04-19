@@ -16,7 +16,7 @@
 
   let error: string;
 
-  async function submit() {
+  const submit = async () => {
     const res = await post("/api/signup", inputField);
 
     if (!res["error"]) goto("/auth/login");
@@ -41,7 +41,7 @@
     />
 
     <input
-      type="text"
+      type="passwords"
       bind:value={inputField.password}
       placeholder="Password"
     />
